@@ -1,0 +1,16 @@
+export default nullToUndefind =_=> {
+
+	if(!_) return {};
+	if(typeof _ != 'object') return _;
+
+	const stack = [_];
+	for(const curr of stack) {
+		Object.keys(curr).forEach(k=>{
+			const v = curr[k];
+			if(v === null) curr[k] = undefined;
+			if(v && typeof v == 'object') stack.push(v);
+		})
+	}
+
+	return _;
+}
